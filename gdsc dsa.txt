@@ -1,0 +1,224 @@
+10th
+class Solution {
+public:
+    bool isMonotonic(vector<int>& nums) {
+        
+        bool ans1 = true, ans2 = true;
+        
+        for(int i = 0; i < nums.size() - 1; i++){
+            if(nums[i] > nums[i + 1]){
+                ans1 = false;
+                break;
+            }
+            
+            ans1 = true;
+        }
+        
+         for(int i = 0; i < nums.size() - 1; i++){
+            if(nums[i] < nums[i + 1]){
+                ans2 = false;
+                break;
+            }
+             
+            ans2 = true; 
+        }
+        
+        return ans1 || ans2;
+    }
+};
+5th
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        
+        vector<int> ans;
+        int flag = 0;
+        
+        for(int i = 0; i < nums.size(); i++){
+            
+            if(nums[i] == target && flag == 0){
+                ans.push_back(i);
+                flag++;
+            }
+            
+            if(nums[i] == target && i == nums.size() - 1){
+                ans.push_back(i);
+                break;
+            }
+            
+            if(nums[i] == target && nums[i + 1] != target){
+                ans.push_back(i);
+            }
+        }
+        
+        if(ans.size() == 0){
+            ans.push_back(-1);
+            ans.push_back(-1);
+        }
+        
+        return ans;
+    }
+};
+6th
+#include <iostream>
+using namespace std;
+
+
+int *rev(int arr[], int n){
+    
+    int i = 0, j = n - 1;
+    
+    while(i <= j){
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+        i++;
+        j--;
+    }
+    
+    return arr;
+}
+
+int main() {
+    
+	int t;
+	int n;
+	cin>>t;
+	
+while(t != 0){
+    
+    cin>>n;
+    
+    int arr[n];
+    
+    for(int i = 0; i < n; i++){
+	    cin>>arr[i];
+	}
+	
+	int *ans = rev(arr, n);
+	
+	for(int i = 0; i < n; i++){
+	    cout<<arr[i]<<" ";
+	}
+	
+	cout<<endl;
+	
+	t--;
+	
+}	
+	
+	return 0;
+}8th
+int removeDuplicates(vector<int>& nums) {
+
+ int curMax = -101;
+    
+        int index = 0;
+        int k = 0;
+    
+        for(int i=0; i<nums.size(); i++){
+            
+            if(nums[i] > curMax){
+                k++;
+                curMax = nums[i];
+                nums[index++] = nums[i];
+            }
+        }
+        return k;
+
+    } };
+12th
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        
+        vector<int> ans;
+        
+        for(int i = 0; i < nums.size(); i++){
+            
+            for(int j = i + 1; j < nums.size(); j++){
+                
+                if(nums[i] + nums[j] == target){
+                    ans.push_back(i);
+                    ans.push_back(j);
+                    
+                }
+            }
+        }
+        
+        return ans;
+    }
+};
+3rd
+//Function to rotate an array by d elements in counter-clockwise direction. 
+    void rotateArr(int arr[], int d, int n){
+        
+        int temp[d];
+        int k = 0;
+        
+        for(int i = 0; i < d; i++){
+            temp[i] = arr[i];
+        }
+        
+        for(int i = 0; i < n - d; i++){
+            arr[i] = arr[i + d];
+        }
+        
+        for(int i = n - d; i < n; i++){
+            arr[i] = temp[k++];
+        }
+        
+        return;
+    }
+};
+9th
+int pivotIndex(vector<int>& nums) {
+        
+        int left = 0, right, sum = 0, n = nums.size(), pivot = -1;
+        for(int i = 0; i < n; i++) {
+            sum += nums[i];
+        }
+        
+        right = sum - nums[0];
+        if(right == left) {
+            pivot = 0;
+        }
+        else{
+            for(int i = 1; i < n; i++) {
+                right -= nums[i];
+                left += nums[i - 1];
+                if(right == left) {
+                    pivot = i;
+                    break;
+                }
+            }
+        }
+        
+        return pivot;
+        
+        
+    }
+4th
+#include<unordered_map>
+
+class Solution {
+  public:
+    // Function to return the position of the first repeating element.
+    int firstRepeated(int arr[], int n) {
+        
+    unordered_map<int, int> hash;
+    
+    for(int i = 0; i < n; i++){
+        hash[arr[i]]++;
+    }
+    
+    for(int i = 0; i < n; i++){
+        if(hash[arr[i]] > 1){
+            return i+1;
+        }
+    }
+    
+    return -1;
+    
+    }
+};
