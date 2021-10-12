@@ -1,0 +1,165 @@
+Q1
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>> ans;
+        if(nums.size()<3){
+            return ans;
+        }
+        sort(nums.begin(),nums.end());
+        for(int i=0;i<nums.size()-2;i++){
+            if(i==0||(nums[i]!=nums[i-1])){
+                int j = i+1,k=nums.size()-1;
+                while(j<k){
+                    int sum = nums[i]+nums[j]+nums[k];
+                    if(sum==0){
+                        vector<int> v={nums[i],nums[j],nums[k]};
+                        ans.push_back(v);
+                        while(j<k&&nums[j]==nums[j+1])j++;
+                        while(j<k&&nums[k]==nums[k-1])k--;
+                        j++;k--;
+                    }
+                    else if(sum>0){
+                        k--;
+                    }
+                    else{
+                        j++;
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+
+
+Q2
+    int maxSubArray(vector<int>& nums) {
+        int maxsum=nums[0],cursum=nums[0];
+        for(int i=1;i<nums.size();i++)
+        {
+            cursum+=nums[i];
+            if(cursum<nums[i])
+            {
+                cursum=nums[i];
+            }
+            if(cursum>maxsum)
+            {
+                maxsum=cursum;
+            }
+        }
+        return maxsum;
+    }
+Q3
+ void modifyAndRearrangeArr(int arr[], int n) 
+    { 
+    	// Complete the function
+    	for(int i=0;i<n-1;i++){
+    	    if(arr[i+1]==arr[i]){
+    	        arr[i]*=2;
+    	        arr[i+1]=0;
+    	    }
+    	}
+        int count=0;
+        for(int i=0;i<n;i++){
+            if(arr[i]!=0){
+                arr[count++]=arr[i];
+            }
+        }
+        for(int i=count;i<n;i++){
+            arr[i]=0;
+        }
+    }
+
+Q4
+    int findMissing(int arr[], int n) { 
+        
+        // Your code here
+        bool isPresent[n+1]={false};
+        for(int i=0;i<n;i++){
+            if(arr[i]>0&&arr[i]<=n){
+                isPresent[arr[i]]=true;
+            }
+        }
+        for(int i=1;i<n+1;i++){
+            if(!isPresent[i]){
+                return i;
+            }
+        }
+        
+        return n+1;
+    }
+
+Q5
+    int maxProfit(vector<int>& prices) {
+        vector<int> arr;int max=0;
+       for(int i=prices.size()-1;i>=0;i--)
+       {
+           if(prices[i]>=max)
+           {
+               arr.push_back(prices[i]);
+               max=prices[i];
+           }
+           else
+           {
+               arr.push_back(arr[arr.size()-1]);
+           }
+       }
+        max=0;
+        for(int i=0,j=arr.size()-2;i<prices.size()-1&&j>=0;i++,j--)
+           {
+               if((arr[j]-prices[i])>max)
+               {
+                   max=arr[j]-prices[i];
+               }
+           }
+        return max;
+    }
+
+Q6
+    int searchInsert(vector<int>& nums, int target) {
+        return lower_bound(nums.begin(),nums.end(),target)-nums.begin();
+    }
+
+Q7
+void sort012(int a[], int n)
+{
+    int count[3]={0};
+    for(int i=0;i<n;i++){
+        count[a[i]]++;
+    }
+    for(int i=0;i<n;i++){
+        if(count[0]){
+            a[i]=0;
+            count[0]--;
+        }else if(count[1]){
+            a[i]=1;
+            count[1]--;
+        }else{
+            a[i]=2;
+            count[2]--;
+        }
+    }
+    
+}
+
+
+
+Q8
+    vector<int> subarraySum(int arr[], int n, long long s)
+    {
+        int l=0;
+        long long sum=0;
+        for(int i=0;i<n;i++){
+            if(sum>s&&l<i-1){
+              sum = sum - arr[l];
+              l++;
+            }
+            if(sum == s){
+                vector<int> ans={l+1,i};
+                return ans;
+            }
+            sum+=arr[i];
+        }
+        vector<int> ans={-1,-1};
+        return ans;
+        // Your code here
+    }
+
