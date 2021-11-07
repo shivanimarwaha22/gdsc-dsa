@@ -1,0 +1,122 @@
+Q1
+    char getMaxOccuringChar(string str)
+    {
+        // Your code here
+        map<char,int> m;
+        for(int i=0;i<str.size();i++){
+            m[str[i]]++;
+        }
+        int ans=INT_MIN;
+        char character;
+        for(auto itr:m){
+            if(ans<itr.second){
+                ans=itr.second;
+                character=itr.first;
+            }
+        }
+        return character;
+    }
+ Q2 int countWords(string s)
+{
+    int ans=0,idx=0,n=s.size();
+    while(idx<n&&(islower(s[idx]))){
+        idx++;
+    }
+    for(int i=idx;i<n;i++){
+        if(!islower(s[i])){
+            ans++;
+        }
+    }
+    if(islower(s[n-1])){
+        ans++;
+    }
+    return ans;
+    //code here.
+}
+
+Q3 
+
+    void reverseString(vector<char>& s) {
+        for(int i=0,j=s.size()-1;i<s.size()/2;i++,j--)
+        {
+            swap(s[i],s[j]);
+        }
+Q4
+
+#include<bits/stdc++.h>
+using namespace std;
+ 
+int main(){
+ 
+   string s;
+   cin>>s;
+   for(int i=0;i<s.size();i++){
+       if(isupper(s[i]))
+           s[i]=tolower(s[i]);
+       else s[i]=toupper(s[i]);
+   }
+   cout<<s;
+   return 0;
+}
+Q(n-2) 
+int n = matrix.length;
+        for (int i = 0; i < (n + 1) / 2; i ++) {
+            for (int j = 0; j < n / 2; j++) {
+                int temp = matrix[n - 1 - j][i];
+                matrix[n - 1 - j][i] = matrix[n - 1 - i][n - j - 1];
+                matrix[n - 1 - i][n - j - 1] = matrix[j][n - 1 -i];
+                matrix[j][n - 1 - i] = matrix[i][j];
+                matrix[i][j] = temp;
+            }
+        }
+Q(n-1)
+    vector<vector<int>> generateMatrix(int n) {
+        vector<vector<int>> result (n, vector<int>(n));
+        int cnt = 1;
+        for (int i = 0; i < (n + 1) / 2; i++) {
+            for (int j = i; j < n - i; j++) {
+                result[i][j] = cnt++;
+            }
+            for (int j = i + 1; j < n - i; j++) {
+                result[j][n - i - 1] = cnt++;
+            }
+            for (int j = n - i - 2; j >= i; j--) {
+                result[n - i - 1][j] = cnt++;
+            }
+            for (int j = n - i - 2; j > i; j--) {
+                result[j][i] = cnt++;
+            }
+        }
+
+        return result;
+    }
+Q(n)
+    void rotate(vector<vector<int>> &matrix) {
+        int n = matrix.size();
+        for (int i = 0; i < (n + 1) / 2; i ++) {
+            for (int j = 0; j < n / 2; j++) {
+                int temp = matrix[n - 1 - j][i];
+                matrix[n - 1 - j][i] = matrix[n - 1 - i][n - j - 1];
+                matrix[n - 1 - i][n - j - 1] = matrix[j][n - 1 -i];
+                matrix[j][n - 1 - i] = matrix[i][j];
+                matrix[i][j] = temp;
+            }
+        }
+    }
+    bool checkEqual(vector<vector<int>> m1,vector<vector<int>> m2){
+        for(int i=0;i<m1.size();i++){
+ for(int j=0;j<m1[i].size();j++){
+                if(m1[i][j]!=m2[i][j])
+                    return false;
+            }
+        }
+        return true;
+    }
+    bool findRotation(vector<vector<int>>& mat, vector<vector<int>>& target) {
+        for(int i=0;i<4;i++){
+            rotate(mat);
+            if(checkEqual(mat,target))
+                return true;
+        }
+        return false;
+    }
