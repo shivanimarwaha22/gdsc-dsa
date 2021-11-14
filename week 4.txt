@@ -1,0 +1,66 @@
+Q1     
+bool isPowerOfTwo(int n) {
+        if(n==0)
+            return false;
+        if(n==1)
+            return true;
+        if(n%2==0)
+            return isPowerOfTwo(n/2);
+        return false;
+    }
+
+Q2 
+    int ans[31];
+    int fib(int n) {
+        if(n==1)
+            return 1;
+        if(n==0)
+            return 0;
+        if(ans[n]>0)
+            return ans[n];
+        ans[n] = fib(n-1) + fib(n-2);
+        return ans[n];
+    }
+Q3 
+long long int factorial(int N){
+    if(N==0)
+        return 1;
+    if(N==1)
+        return 1;
+    return N*factorial(N-1);
+}
+Q4 
+long long int factorial(int N){
+    if(N==0)
+        return 1;
+    if(N==1)
+        return 1;
+    return N*factorial(N-1);
+}
+Q5 
+    void reverseString(vector<char>& s,int i=INT_MAX,int j=0) {
+        if(j==0&&i==INT_MAX){
+            reverseString(s,0,s.size()-1);
+            return;
+        }
+        if(i>=j){
+            return;
+        }
+        swap(s[i],s[j]);
+        reverseString(s,i+1,j-1);
+    }
+
+Q5 
+long long toh(int N, int from, int to, int aux) {
+    //Your code here
+    if(N==1){
+        printf("move disk %d from rod %d to rod %d\n",N,from,to);
+        return 1;
+    }
+    int a = toh(N-1,from,aux,to);
+    printf("move disk %d from rod %d to rod %d\n",N,from,to);
+    int b = toh(N-1,aux,to,from);
+    return a + b +1;
+}
+
+
