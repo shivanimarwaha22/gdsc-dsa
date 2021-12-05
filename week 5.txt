@@ -1,0 +1,137 @@
+Q1
+ int arr[200][200];
+  Solution(){
+      for(int i=0;i<200;i++){
+          for(int j=0;j<200;j++){
+              arr[i][j]=-1;
+          }
+      }
+  }
+    long long int numberOfPaths(int m, int n){
+        if(arr[m][n]!=-1)
+            return arr[m][n];
+        if(m==1){
+            return 1;
+        }
+        if(n==1){
+            return 1;
+        }
+        arr[m][n] =
+        (numberOfPaths(m-1,n)%(1000000007) + numberOfPaths(m,n-1)%1000000007)%1000000007;
+        return arr[m][n];
+    }
+Q2
+    int climbStairs(int n) {
+        int memo[n+1];
+        for(int i=0;i<n+1;i++)memo[i]=-1;
+        return calcSteps(n,memo);
+    }
+    int calcSteps(int n,int memo[]){
+        if(n==1||n==0) return 1;
+        if(memo[n]!=-1) return memo[n];
+        int ans=0;
+        ans+=calcSteps(n-1,memo)+calcSteps(n-2,memo);
+        memo[n]=ans;
+        return ans;
+    }
+
+Q3
+    vector<vector<int>> permute(vector<int>& nums) {
+
+        vector<vector<int>> ans;
+        if(nums.size()==1){
+            vector<int> v;
+            v.push_back(nums[0]);
+            ans.push_back(v);
+            return ans;
+        }
+            
+        for(int i=0;i<nums.size();i++){
+            int pos = i;
+            vector<int> n;
+            for(int j=0;j<nums.size();j++){
+                if(j!=pos){
+                    n.push_back(nums[j]);
+                }
+            }
+            vector<vector<int>> p = permute(n);
+            for(int j=0;j<p.size();j++){
+                
+                vector<int> a;
+                a.push_back(nums[pos]);
+                for(auto x:p[j]){
+                    a.push_back(x);
+                }
+                ans.push_back(a);
+            }
+        }
+        return ans;
+    }
+
+Q4 
+	    int rev(int n, int temp){
+            if (n == 0)
+                return temp;
+            temp = (temp * 10) + (n % 10);
+            return rev(n / 10, temp);
+	    }
+		string is_palindrome(int n)
+		{
+		    return rev(n,0)==n?"Yes":"No";
+		}
+Q5 
+vector<int> allIndex(vector<int>& arr, int idx, int data, int count)
+{  
+    vector<int> a;
+    if(idx==arr.size()){
+        return a;
+    }
+    if(arr[idx]==data){
+        count++;
+        a.push_back(idx);
+    } 
+    vector<int> ans = allIndex(arr,idx+1,data,count);
+    for(auto x:ans){
+        a.push_back(x);
+    }
+    return a;
+}
+
+Q6 
+int max(int arr[], int idx, int n){
+   if(idx==n-1)
+        return arr[idx];
+    int m = arr[idx],m1=max(arr,idx+1,n);
+    return m>m1?m:m1;
+}
+Q7 
+
+int max(int arr[], int idx, int n){
+   if(idx==n-1)
+        return arr[idx];
+    int m = arr[idx],m1=max(arr,idx+1,n);
+    return m>m1?m:m1;
+}
+Q8
+vector<string> get_stair_paths(int n) {
+  if (n < 0) {
+    vector<string> brr;
+    return brr;
+  }
+  if (n == 0) {
+    vector<string> brr;
+    brr.push_back("");
+    return brr;
+  }
+  vector<string>ans;
+  for (int step = 1; step <= 3; step++) {
+    vector<string> s = get_stair_paths(n - step);
+    for (int j = 0; j < s.size(); j++) {
+      string str = s[j];
+      char ns = (char)(step + '0');
+      string an = ns + str;
+      ans.push_back(an);
+    }
+  }
+  return ans;
+}
